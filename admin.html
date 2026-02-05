@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survey Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="admin-hero">
+        <div class="container header-row">
+          <div>
+            <p class="eyebrow">Secure Admin</p>
+            <h1>Survey Dashboard</h1>
+            <p class="subtitle">
+              Manage questions, review responses, and monitor analytics in
+              real time.
+            </p>
+          </div>
+          <button id="logout-btn" class="ghost hidden" type="button">
+            Sign out
+          </button>
+        </div>
+      </header>
+
+      <main class="container">
+        <section id="config-error" class="alert hidden"></section>
+        <section id="auth-section" class="card">
+          <h2>Admin Sign In</h2>
+          <p class="muted">Use your Firebase admin email and password.</p>
+          <form id="login-form" class="auth-form">
+            <label class="field">
+              Email
+              <input id="login-email" type="email" required autocomplete="username" />
+            </label>
+            <label class="field">
+              Password
+              <input id="login-password" type="password" required autocomplete="current-password" />
+            </label>
+            <button type="submit" class="primary">Sign in</button>
+            <p id="login-error" class="error hidden"></p>
+          </form>
+        </section>
+
+        <section id="dashboard" class="hidden">
+          <div class="grid two">
+            <div class="card">
+              <h2>Response Overview</h2>
+              <div class="stats">
+                <div>
+                  <p class="stat-label">Total submissions</p>
+                  <p id="total-responses" class="stat-value">0</p>
+                </div>
+                <div>
+                  <p class="stat-label">Questions live</p>
+                  <p id="total-questions" class="stat-value">0</p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h2>Question Management</h2>
+              <p id="edit-indicator" class="muted hidden"></p>
+              <form id="question-form" class="question-form">
+                <label class="field">
+                  Question text
+                  <input id="question-text" type="text" required />
+                </label>
+                <label class="field">
+                  Question type
+                  <select id="question-type" required>
+                    <option value="short_text">Short text</option>
+                    <option value="single_choice">Multiple choice (single)</option>
+                    <option value="multi_choice">Multiple choice (multi)</option>
+                    <option value="yes_no">Yes / No</option>
+                    <option value="scale_1_5">Opinion scale (1-5)</option>
+                  </select>
+                </label>
+                <label class="field">
+                  Options (one per line)
+                  <textarea id="question-options" rows="4" placeholder="Only for choice questions"></textarea>
+                </label>
+                <label class="checkbox">
+                  <input id="question-required" type="checkbox" checked />
+                  Required question
+                </label>
+                <div class="button-row">
+                  <button type="submit" id="question-submit" class="primary">
+                    Add question
+                  </button>
+                  <button type="button" id="cancel-edit" class="ghost hidden">
+                    Cancel edit
+                  </button>
+                </div>
+                <p id="question-error" class="error hidden"></p>
+              </form>
+              <div class="question-list" id="question-list"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Responses</h2>
+              <div class="button-row">
+                <a
+                  class="ghost"
+                  href="https://docs.google.com/spreadsheets/d/1LaLmPx0GqQMiP90TzazzmFK7MYoZeMvqjAuoNgwx0S4/edit?usp=sharing"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Open Google Sheet
+                </a>
+                <button id="download-csv" class="ghost" type="button">
+                  Download CSV
+                </button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="responses-table" id="responses-table">
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Reports</h2>
+              <p id="reports-count" class="muted">0 reports</p>
+            </div>
+            <div class="table-wrap">
+              <table class="responses-table" id="reports-table">
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Analytics</h2>
+            <p class="muted">
+              Charts update automatically when new responses arrive.
+            </p>
+            <div id="charts-container" class="charts-grid"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <p>Only authenticated admins can access this dashboard.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="config.js"></script>
+    <script type="module" src="js/admin.js?v=4"></script>
+  </body>
+</html>

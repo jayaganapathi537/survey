@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Innovation Survey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="container">
+          <div class="hero-top">
+            <p class="eyebrow">Open Survey</p>
+            <button id="open-report" class="ghost link-button" type="button">
+              Report content
+            </button>
+          </div>
+          <h1>Project Showcase & Hackathon Experience Survey</h1>
+          <p class="subtitle">
+            Help us understand how students discover opportunities and present
+            projects. This takes less than 3 minutes.
+          </p>
+        </div>
+      </header>
+
+      <main class="container">
+        <section id="config-error" class="alert hidden"></section>
+        <section class="card" id="survey-card">
+          <form id="survey-form" novalidate>
+            <div id="questions-container" class="form-grid"></div>
+            <div class="form-actions">
+              <button type="submit" class="primary">Submit response</button>
+              <p id="form-success" class="success hidden">
+                Thank you for filling the form.
+              </p>
+              <p id="form-error" class="error hidden"></p>
+            </div>
+          </form>
+        </section>
+        <section id="survey-thanks" class="card hidden">
+          <h2>Thank you for filling the form.</h2>
+          <p class="muted">Your response has been recorded.</p>
+        </section>
+      </main>
+
+      <div id="report-toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+      <div id="report-overlay" class="report-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="report-title">
+        <div class="report-card">
+          <div class="report-header">
+            <h2 id="report-title">Report Content</h2>
+            <button id="close-report" class="ghost" type="button">Close</button>
+          </div>
+          <p class="muted">
+            Report spam, harassment, misleading content, or other issues. This form is separate from the survey.
+          </p>
+          <form id="report-form" class="report-form" novalidate>
+            <label class="field">
+              Name*
+              <input id="report-name" type="text" required />
+            </label>
+            <label class="field">
+              Gmail*
+              <input id="report-email" type="email" required />
+            </label>
+            <div class="field">
+              Reason*
+              <div class="radio-group" id="report-reasons">
+                <label class="radio-option">
+                  <input type="radio" name="report-reason" value="Spam or misleading content" required />
+                  <span>Spam or misleading content</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="report-reason" value="Harassment and bullying" />
+                  <span>Harassment and bullying</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="report-reason" value="Fake info" />
+                  <span>Fake info</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="report-reason" value="Copyright" />
+                  <span>Copyright</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="report-reason" value="Other" />
+                  <span>Other</span>
+                </label>
+              </div>
+            </div>
+            <label class="field hidden" id="report-other-wrapper">
+              Other reason details
+              <input id="report-other" type="text" placeholder="Describe the other reason" />
+            </label>
+            <label class="field">
+              Short description
+              <textarea id="report-description" rows="4" required placeholder="Describe the issue briefly"></textarea>
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="primary">Submit report</button>
+              <p id="report-success" class="success hidden">
+                Ok user, your report has been received and will be reviewed immediately.
+              </p>
+              <p id="report-error" class="error hidden"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container">
+          <p>Responses are stored securely.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script type="module" src="js/main.js?v=2"></script>
+  </body>
+</html>
