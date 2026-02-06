@@ -57,7 +57,7 @@ Then open:
   - Seeds the default 12 questions if the `questions` collection is empty.
   - Shows all responses in a table.
   - Builds charts for each question (bar/pie) that update in real time.
-  - Lets you add/edit/delete/reorder questions (updates the public form instantly).
+  - Lets you add/edit/delete/reorder questions, including dropdown questions (updates the public form instantly).
   - Exports responses to CSV.
   - Opens the live Google Sheet from the Responses header.
   - Shows abuse reports in a separate table.

@@ -322,7 +322,8 @@ questionForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  const needsOptions = type === "single_choice" || type === "multi_choice";
+  const needsOptions =
+    type === "single_choice" || type === "multi_choice" || type === "dropdown";
   const options = needsOptions
     ? optionsRaw.split("\n").map((opt) => opt.trim()).filter(Boolean)
     : [];
@@ -539,7 +540,8 @@ function clearEditMode() {
 }
 
 function updateOptionsFieldState(type) {
-  const needsOptions = type === "single_choice" || type === "multi_choice";
+  const needsOptions =
+    type === "single_choice" || type === "multi_choice" || type === "dropdown";
   questionOptionsInput.disabled = !needsOptions;
   if (!needsOptions) {
     questionOptionsInput.value = "";
@@ -574,7 +576,11 @@ function buildChartData(question, responses) {
     ["1", "2", "3", "4", "5"].forEach((label) => counts.set(label, 0));
   }
 
-  if (question.type === "single_choice" || question.type === "multi_choice") {
+  if (
+    question.type === "single_choice" ||
+    question.type === "multi_choice" ||
+    question.type === "dropdown"
+  ) {
     toSafeArray(question.options).forEach((label) => counts.set(label, 0));
   }
 
@@ -642,7 +648,11 @@ function compressCounts(counts, maxItems) {
 
 function getChartType(question, labels) {
   if (question.type === "yes_no") return "pie";
-  if (question.type === "single_choice" && labels.length <= 5) return "pie";
+  if (
+    (question.type === "single_choice" || question.type === "dropdown") &&
+    labels.length <= 5
+  )
+    return "pie";
   return "bar";
 }
 
@@ -667,6 +677,8 @@ function getTypeLabel(type) {
       return "Short text";
     case "single_choice":
       return "Single choice";
+    case "dropdown":
+      return "Dropdown";
     case "multi_choice":
       return "Multi select";
     case "yes_no":

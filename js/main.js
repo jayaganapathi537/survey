@@ -136,6 +136,27 @@ function renderQuestions() {
       );
     }
 
+    if (question.type === "dropdown") {
+      const select = createEl("select");
+      select.name = question.id;
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "Select an option";
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      select.appendChild(placeholder);
+      (Array.isArray(question.options) ? question.options : []).forEach(
+        (option) => {
+          const opt = document.createElement("option");
+          opt.value = option;
+          opt.textContent = option;
+          select.appendChild(opt);
+        }
+      );
+      if (question.required) select.required = true;
+      fieldWrapper.appendChild(select);
+    }
+
     if (question.type === "multi_choice") {
       fieldWrapper.appendChild(
         buildOptions(question, "checkbox-group", "checkbox")
@@ -403,6 +424,11 @@ function getFieldValue(question, field) {
       return Number(checked.value);
     }
     return checked.value;
+  }
+
+  if (question.type === "dropdown") {
+    const select = field.querySelector("select");
+    return select ? select.value : "";
   }
 
   if (question.type === "multi_choice") {
